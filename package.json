@@ -1,0 +1,30 @@
+{
+  "name": "sachin-vs-kohli",
+  "version": "1.0.0",
+  "description": "Complete career statistics comparison between Sachin Tendulkar and Virat Kohli",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.0.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "next-auth": "^4.24.5",
+    "bcryptjs": "^2.4.3",
+    "pg": "^8.11.3",
+    "recharts": "^2.10.3",
+    "date-fns": "^3.0.6",
+    "lucide-react": "^0.294.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.6",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.0.4"
+  }
+}
