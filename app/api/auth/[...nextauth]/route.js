@@ -2,11 +2,6 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 
-const ADMIN_CREDENTIALS = {
-  username: process.env.ADMIN_USERNAME || 'admin@sachinvsvirat',
-  passwordHash: process.env.ADMIN_PASSWORD_HASH || '$2a$10$rqJ5tXzq3e9Yn8F/HxYHLOrM1ypOmVBbKF.QqGxJ3TJmN2LqD8pFm'
-};
-
 const authOptions = {
   providers: [
     CredentialsProvider({
@@ -16,29 +11,30 @@ const authOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        try {
-          if (credentials.username !== ADMIN_CREDENTIALS.username) {
-            return null;
-          }
+        // Hardcoded credentials for testing
+        const ADMIN_USERNAME = 'admin@sachinvsvirat';
+        const ADMIN_PASSWORD = 'admin123';
 
-          const isValidPassword = await bcrypt.compare(
-            credentials.password,
-            ADMIN_CREDENTIALS.passwordHash
-          );
+        console.log('=== LOGIN ATTEMPT ===');
+        console.log('Entered username:', credentials.username);
+        console.log('Expected username:', ADMIN_USERNAME);
+        console.log('Username match:', credentials.username === ADMIN_USERNAME);
+        console.log('Entered password:', credentials.password);
+        console.log('Expected password:', ADMIN_PASSWORD);
+        console.log('Password match:', credentials.password === ADMIN_PASSWORD);
 
-          if (!isValidPassword) {
-            return null;
-          }
-
+        // Simple direct comparison (no hashing for now)
+        if (credentials.username === ADMIN_USERNAME && credentials.password === ADMIN_PASSWORD) {
+          console.log('✅ LOGIN SUCCESS');
           return {
             id: '1',
             name: 'Admin',
             email: credentials.username
           };
-        } catch (error) {
-          console.error('Authentication error:', error);
-          return null;
         }
+
+        console.log('❌ LOGIN FAILED');
+        return null;
       }
     })
   ],
